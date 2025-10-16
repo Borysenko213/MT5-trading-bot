@@ -31,6 +31,32 @@ class MT5Connector:
                 return False
 
             print("[DEBUG] mt5.initialize() succeeded")
+
+            # Check if already logged in
+            existing_account = mt5.account_info()
+            if existing_account is not None:
+                print(f"[DEBUG] Already connected to account: {existing_account.login}")
+                print(f"[DEBUG] Server: {existing_account.server}")
+
+                # Verify it's the correct account
+                expected_account = config.broker.demo_account if use_demo else config.broker.live_account
+                if existing_account.login == expected_account:
+                    print("[DEBUG] Using existing MT5 connection (already logged in)")
+                    self.connected = True
+                    self.account_info = existing_account._asdict()
+
+                    logger.info(f"[OK] Connected to MT5 - Account: {existing_account.login} ({'Demo' if use_demo else 'Live'})")
+                    logger.info(f"  Server: {existing_account.server}")
+                    logger.info(f"  Balance: ${self.account_info['balance']:.2f}")
+                    logger.info(f"  Leverage: 1:{self.account_info['leverage']}")
+
+                    return True
+                else:
+                    print(f"[DEBUG] Wrong account connected ({existing_account.login} != {expected_account})")
+                    print(f"[DEBUG] Will attempt to switch accounts...")
+            else:
+                print("[DEBUG] No existing connection - will login")
+
             # Login to account
             account = config.broker.demo_account if use_demo else config.broker.live_account
             password = config.broker.demo_password if use_demo else config.broker.live_password
@@ -49,7 +75,7 @@ class MT5Connector:
             self.connected = True
             self.account_info = mt5.account_info()._asdict()
 
-            logger.info(f"[OK] Connected to MT5 - Account: {account} ({('Demo' if use_demo else 'Live')})")
+            logger.info(f"[OK] Connected to MT5 - Account: {account} ({'Demo' if use_demo else 'Live'})")
             logger.info(f"  Server: {server}")
             logger.info(f"  Balance: ${self.account_info['balance']:.2f}")
             logger.info(f"  Leverage: 1:{self.account_info['leverage']}")
@@ -58,6 +84,7 @@ class MT5Connector:
 
         except Exception as e:
             logger.error(f"MT5 initialization error", e)
+            print(f"[DEBUG] Exception in initialize(): {type(e).__name__}: {e}")
             return False
 
     def shutdown(self):
