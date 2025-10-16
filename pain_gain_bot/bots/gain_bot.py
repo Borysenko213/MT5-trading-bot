@@ -11,6 +11,7 @@ from ..strategy.signals import SignalEngine
 from ..strategy.order_manager import OrderManager
 from ..strategy.risk_manager import risk_manager
 from ..utils.logger import logger
+from ..utils.trade_exporter import trade_exporter
 from ..config import config
 
 class GainBot:
@@ -187,6 +188,12 @@ class GainBot:
 
         # Disconnect from MT5
         connector.shutdown()
+
+        # Export trade history to CSV
+        print("[DEBUG] Exporting trade history to CSV...")
+        trade_exporter.print_summary()
+        trade_exporter.export_to_csv()
+        trade_exporter.export_to_json()
 
         # Log final statistics
         risk_status = risk_manager.get_risk_status()

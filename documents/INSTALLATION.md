@@ -75,8 +75,10 @@ Should output pip version information.
 
 ### 2.3 Login to Account
 
+**IMPORTANT:** Log into MT5 BEFORE running the bot!
+
 **Demo Account:**
-- Server: **Weltrade**
+- Server: **Weltrade-Demo** (note the "-Demo" suffix!)
 - Login: **19498321**
 - Password: **YOUR_PASSWORD**
 
@@ -84,6 +86,12 @@ Should output pip version information.
 - Server: **Weltrade**
 - Login: **34279304**
 - Password: **YOUR_PASSWORD**
+
+**Steps:**
+1. Open MT5
+2. Right-click on the account in Navigator
+3. Select "Login"
+4. Verify you see a **green connection icon** in bottom-right corner
 
 ### 2.4 Add Symbols to Market Watch
 
@@ -184,34 +192,41 @@ class BrokerConfig:
     use_demo: bool = True  # True for demo, False for live
 ```
 
-### 5.2 Option B: Create config.json
+### 5.2 Option B: Edit config.json (Recommended)
 
-Create a file named `config.json` in the trading folder:
+A `config.json` file should already exist in the trading folder. Edit it with your settings:
+
+**Important notes:**
+- ✅ The bot **automatically loads config.json** at startup
+- ✅ Server name must match EXACTLY: `"Weltrade-Demo"` or `"Weltrade"`
+- ✅ Symbol names must have spaces: `"PainX 400"` not `"PainX400"`
+- ✅ For 24/7 testing, set session to `"00:00:00"` - `"23:59:59"`
+
+**Key settings to customize:**
 
 ```json
 {
   "broker": {
-    "server": "Weltrade",
+    "server": "Weltrade-Demo",        // ← Must match MT5 server name exactly!
     "demo_account": 19498321,
     "demo_password": "YOUR_PASSWORD",
     "use_demo": true
   },
   "symbols": {
-    "pain_symbols": ["PainX 400", "PainX 600", "PainX 800", "PainX 999"],
-    "gain_symbols": ["GainX 400", "GainX 600", "GainX 800", "GainX 999"]
+    "pain_symbols": ["PainX 400"],    // ← Note the SPACE in symbol names!
+    "gain_symbols": ["GainX 400"]
   },
   "risk": {
-    "lot_size": 0.10,
-    "daily_stop_usd": 40.0,
-    "daily_target_usd": 100.0,
-    "max_consecutive_orders": 3,
+    "lot_size": 0.01,                 // ← Start small for testing
+    "daily_stop_usd": 5.0,
+    "daily_target_usd": 10.0,
     "max_spread_pips": 2.0,
     "max_slippage_pips": 2.0
   },
   "session": {
-    "session_start": "19:00:00",
-    "session_end": "06:00:00",
-    "daily_close_time": "16:00:00"
+    "session_start": "00:00:00",      // ← 24/7 for testing
+    "session_end": "23:59:59",
+    "allow_extended_hours": true
   }
 }
 ```

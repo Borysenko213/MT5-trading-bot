@@ -9,6 +9,7 @@ from typing import Dict, List, Optional, Tuple
 from ..data.mt5_connector import connector
 from ..indicators.technical import indicators
 from ..utils.logger import logger
+from ..utils.trade_exporter import trade_exporter
 from ..config import config
 
 class OrderManager:
@@ -136,7 +137,8 @@ class OrderManager:
 
             if result:
                 # Track order
-                self.last_entry_time[symbol] = datetime.now()
+                entry_time = datetime.now()
+                self.last_entry_time[symbol] = entry_time
                 self.consecutive_orders[symbol] = self.consecutive_orders.get(symbol, 0) + 1
 
                 self.active_positions[result['ticket']] = {
@@ -144,14 +146,27 @@ class OrderManager:
                     'action': action,
                     'volume': volume,
                     'entry_price': result['price'],
-                    'entry_time': datetime.now(),
+                    'entry_time': entry_time,
                     'sl': sl,
                     'tp': tp,
-                    'hold_until': datetime.now() + timedelta(minutes=config.strategy.hold_minutes)
+                    'hold_until': entry_time + timedelta(minutes=config.strategy.hold_minutes)
                 }
 
                 logger.info(f"[OK] Order executed: {action} {volume} {symbol} @ {result['price']:.5f} "
                            f"(Ticket: {result['ticket']})")
+
+                # Export trade to CSV
+                trade_exporter.record_trade_open({
+                    'ticket': result['ticket'],
+                    'symbol': symbol,
+                    'action': action,
+                    'volume': volume,
+                    'entry_price': result['price'],
+                    'entry_time': entry_time,
+                    'sl': sl,
+                    'tp': tp,
+                    'bot_type': self.bot_type
+                })
 
                 return result
 
@@ -219,11 +234,46 @@ class OrderManager:
             True if closed successfully
         """
         try:
+            # Get position info before closing
+            if ticket in self.active_positions:
+                position = self.active_positions[ticket]
+            else:
+                position = None
+
+            # Get current price and account balance
+            if position:
+                tick = connector.get_tick(position['symbol'])
+                exit_price = tick['bid'] if position['action'] == 'SELL' else tick['ask'] if tick else None
+            else:
+                exit_price = None
+
             success = connector.close_position(ticket)
 
-            if success and ticket in self.active_positions:
-                position = self.active_positions[ticket]
+            if success and position:
                 logger.info(f"[OK] Position closed: Ticket {ticket} ({reason})")
+
+                # Get updated account balance
+                account_info = connector.get_account_info()
+                balance_after = account_info.get('balance', 0) if account_info else 0
+
+                # Calculate P/L (simplified - actual P/L from MT5 would be more accurate)
+                # Simplified P/L estimate based on price movement
+                if exit_price and position['entry_price']:
+                    if position['action'] == 'SELL':
+                        pnl = (position['entry_price'] - exit_price) * position['volume'] * 100000 * 0.0001
+                    else:  # BUY
+                        pnl = (exit_price - position['entry_price']) * position['volume'] * 100000 * 0.0001
+                else:
+                    pnl = 0.0
+
+                # Export trade closure to CSV
+                trade_exporter.record_trade_close(ticket, {
+                    'exit_price': exit_price,
+                    'exit_time': datetime.now(),
+                    'exit_reason': reason,
+                    'pnl': pnl,
+                    'balance_after': balance_after
+                })
 
                 # Remove from active positions
                 del self.active_positions[ticket]

@@ -183,9 +183,33 @@ Bots will:
 
 ---
 
+## 🧪 Backtesting (NEW!)
+
+Test the strategy with historical data WITHOUT waiting in real-time:
+
+```bash
+python run_backtest.py --symbol "PainX 400" --days 7
+```
+
+This will show you:
+- How many trades would have been executed
+- Win/loss ratio
+- Total profit/loss
+- Performance statistics
+
+**Perfect for:**
+- Verifying the bot makes correct entries
+- Testing different parameters quickly
+- Understanding strategy behavior before live trading
+
+**Learn more:** Read [BACKTESTING.md](BACKTESTING.md)
+
+---
+
 ## 📚 Need More Details?
 
 - **Full Setup:** Read [INSTALLATION.md](INSTALLATION.md)
+- **Backtesting:** Read [BACKTESTING.md](BACKTESTING.md)
 - **Strategy Details:** Read [README.md](README.md)
 - **Testing:** Read [TESTING_GUIDE.md](TESTING_GUIDE.md)
 - **All Features:** Read [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md)
