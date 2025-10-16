@@ -106,10 +106,11 @@ Examples:
     print(" MetaTrader 5 Integration for PainX/GainX Synthetic Indices")
     print("="*70 + "\n")
 
-    # Load config if specified
-    if args.config:
-        logger.info(f"Loading configuration from: {args.config}")
-        load_config(args.config)
+    # Load config - use specified file or default config.json
+    config_file = args.config or "config.json"
+    print(f"[DEBUG] Loading configuration from: {config_file}")
+    logger.info(f"Loading configuration from: {config_file}")
+    load_config(config_file)
 
     # Override demo/live setting
     if args.demo:

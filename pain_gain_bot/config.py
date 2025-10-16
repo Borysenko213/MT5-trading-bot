@@ -163,6 +163,13 @@ def load_config(filepath: str = "config.json"):
         print("[DEBUG] Removing comment fields starting with '_'")
         data = {k: v for k, v in data.items() if not k.startswith('_')}
 
+        # Remove _explanations and _note fields from nested dicts
+        print("[DEBUG] Cleaning nested comment fields")
+        for key in data:
+            if isinstance(data[key], dict):
+                data[key] = {k: v for k, v in data[key].items()
+                            if not k.startswith('_')}
+
         # Process session times (convert string to time object)
         print("[DEBUG] Processing session times")
         session_data = data.get('session', {})
@@ -178,13 +185,6 @@ def load_config(filepath: str = "config.json"):
             h, m, s = map(int, session_data['daily_close_time'].split(':'))
             session_data['daily_close_time'] = time(h, m, s)
             print(f"[DEBUG] daily_close_time converted: {session_data['daily_close_time']}")
-
-        # Remove _explanations and _note fields from nested dicts
-        print("[DEBUG] Cleaning nested comment fields")
-        for key in data:
-            if isinstance(data[key], dict):
-                data[key] = {k: v for k, v in data[key].items()
-                            if not k.startswith('_')}
 
         print("[DEBUG] Creating Config object...")
         config = Config(
