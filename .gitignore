@@ -1,0 +1,9 @@
+overview
+logs
+
+*.rar
+*.txt
+*.pdf
+
+config.json
+.claude

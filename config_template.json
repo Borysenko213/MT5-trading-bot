@@ -1,0 +1,152 @@
+{
+  "_comment": "Pain/Gain Trading Bot - Complete Configuration File",
+  "_version": "1.0.0",
+  "_instructions": "Copy this file to config.json and edit your settings. All parameters are optional - defaults will be used if not specified.",
+
+  "broker": {
+    "_description": "MetaTrader 5 broker connection settings",
+    "server": "Weltrade",
+    "demo_account": 19498321,
+    "demo_password": "YOUR_DEMO_PASSWORD_HERE",
+    "live_account": 34279304,
+    "live_password": "YOUR_LIVE_PASSWORD_HERE",
+    "leverage": 10000,
+    "use_demo": true,
+    "_note": "IMPORTANT: Set use_demo to false only when you're ready for live trading!"
+  },
+
+  "symbols": {
+    "_description": "Trading symbols for each bot",
+    "pain_symbols": [
+      "PainX400",
+      "PainX600",
+      "PainX800",
+      "PainX999"
+    ],
+    "gain_symbols": [
+      "GainX400",
+      "GainX600",
+      "GainX800",
+      "GainX999"
+    ],
+    "_note": "You can trade all 8 symbols or select specific ones. Remove symbols from arrays to disable them."
+  },
+
+  "risk": {
+    "_description": "Risk management parameters - CRITICAL FOR SAFETY",
+    "lot_size": 0.10,
+    "daily_stop_usd": 40.0,
+    "daily_target_usd": 100.0,
+    "max_consecutive_orders": 3,
+    "max_spread_pips": 2.0,
+    "max_slippage_pips": 2.0,
+    "trade_target_usd": 1.5,
+    "trade_target_max_usd": 2.0,
+    "min_lot": 0.01,
+    "max_lot": 1.0,
+    "_explanations": {
+      "lot_size": "Default position size (0.10 = 0.10 lots)",
+      "daily_stop_usd": "Maximum loss per day in USD - trading stops when reached",
+      "daily_target_usd": "Daily profit goal in USD - trading stops when reached",
+      "max_consecutive_orders": "Maximum number of consecutive orders per symbol (3 recommended)",
+      "max_spread_pips": "Maximum allowed spread in pips - order rejected if higher",
+      "max_slippage_pips": "Maximum allowed slippage in pips",
+      "trade_target_usd": "Minimum profit target per trade",
+      "trade_target_max_usd": "Maximum profit target per trade",
+      "min_lot": "Minimum allowed lot size",
+      "max_lot": "Maximum allowed lot size"
+    }
+  },
+
+  "session": {
+    "_description": "Trading session hours and timezone settings",
+    "session_start": "19:00:00",
+    "session_end": "06:00:00",
+    "daily_close_time": "16:00:00",
+    "timezone_offset": -5,
+    "allow_extended_hours": false,
+    "_explanations": {
+      "session_start": "When trading starts (19:00 = 7:00 PM Colombia time)",
+      "session_end": "When trading ends (06:00 = 6:00 AM Colombia time, next day)",
+      "daily_close_time": "When D1 candle closes (16:00 = 4:00 PM Colombia time)",
+      "timezone_offset": "Timezone offset from UTC (-5 for Colombia)",
+      "allow_extended_hours": "Allow trading outside session hours (false = disabled)"
+    }
+  },
+
+  "strategy": {
+    "_description": "Strategy parameters - Controls trading logic",
+    "hold_minutes": 5,
+    "wait_candles": 1,
+    "d1_wick_threshold": 0.5,
+    "small_body_ratio": 0.3,
+    "h4_fib_level": 0.5,
+    "use_m15_for_fib": true,
+    "snake_fast_ema": 8,
+    "snake_slow_ema": 21,
+    "shingle_ema": 50,
+    "purple_line_ema": 34,
+    "squid_period": 13,
+    "news_filter_enabled": false,
+    "news_buffer_minutes": 30,
+    "_explanations": {
+      "hold_minutes": "Minimum minutes to hold each trade (5 recommended)",
+      "wait_candles": "Number of M5 candles to wait after closing before re-entry (1 recommended)",
+      "d1_wick_threshold": "Percentage of D1 wick to fill before stopping (0.5 = 50%)",
+      "small_body_ratio": "Max body size ratio for D1 bias detection (0.3 = 30%)",
+      "h4_fib_level": "Fibonacci retracement level for H4 confirmation (0.5 = 50%)",
+      "use_m15_for_fib": "Use M15 timeframe for Fibonacci swing points (true recommended)",
+      "snake_fast_ema": "Fast EMA period for Snake indicator (8 recommended)",
+      "snake_slow_ema": "Slow EMA period for Snake indicator (21 recommended)",
+      "shingle_ema": "EMA period for Shingle indicator (50 recommended)",
+      "purple_line_ema": "EMA period for Purple Line indicator (34 recommended)",
+      "squid_period": "Period for Squid indicator (13 recommended)",
+      "news_filter_enabled": "Enable/disable news filter (false = disabled for indices)",
+      "news_buffer_minutes": "Minutes to block trading around news events (30 default)"
+    }
+  },
+
+  "backtest": {
+    "_description": "Backtesting configuration",
+    "initial_balance": 500.0,
+    "commission_per_lot": 0.0,
+    "start_date": "2024-01-01",
+    "end_date": "2025-10-14",
+    "export_format": "both",
+    "_explanations": {
+      "initial_balance": "Starting balance for backtests",
+      "commission_per_lot": "Commission charged per lot (0.0 if none)",
+      "start_date": "Backtest start date (YYYY-MM-DD)",
+      "end_date": "Backtest end date (YYYY-MM-DD)",
+      "export_format": "Export format: csv, excel, or both"
+    }
+  },
+
+  "alerts": {
+    "_description": "Logging and notification settings",
+    "enable_telegram": false,
+    "telegram_token": "",
+    "telegram_chat_id": "",
+    "enable_email": false,
+    "email_from": "",
+    "email_to": "",
+    "email_smtp_server": "",
+    "email_smtp_port": 587,
+    "log_level": "INFO",
+    "log_to_file": true,
+    "log_to_console": true,
+    "_explanations": {
+      "enable_telegram": "Send notifications via Telegram (false = disabled)",
+      "telegram_token": "Telegram bot token from @BotFather",
+      "telegram_chat_id": "Your Telegram chat ID",
+      "enable_email": "Send notifications via email (false = disabled)",
+      "email_from": "Sender email address",
+      "email_to": "Recipient email address",
+      "email_smtp_server": "SMTP server address (e.g., smtp.gmail.com)",
+      "email_smtp_port": "SMTP port (587 for TLS, 465 for SSL)",
+      "log_level": "Logging detail level: DEBUG, INFO, WARNING, ERROR",
+      "log_to_file": "Save logs to files (true recommended)",
+      "log_to_console": "Display logs in console (true recommended)"
+    }
+  }
+}

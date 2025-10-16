@@ -1,0 +1,48 @@
+{
+  "broker": {
+    "server": "Weltrade",
+    "demo_account": 19498321,
+    "demo_password": "YOUR_PASSWORD_HERE",
+    "live_account": 34279304,
+    "live_password": "YOUR_PASSWORD_HERE",
+    "use_demo": true
+  },
+
+  "symbols": {
+    "pain_symbols": ["PainX400", "PainX600", "PainX800", "PainX999"],
+    "gain_symbols": ["GainX400", "GainX600", "GainX800", "GainX999"]
+  },
+
+  "risk": {
+    "lot_size": 0.10,
+    "daily_stop_usd": 40.0,
+    "daily_target_usd": 100.0,
+    "max_consecutive_orders": 3,
+    "max_spread_pips": 2.0,
+    "max_slippage_pips": 2.0
+  },
+
+  "session": {
+    "session_start": "19:00:00",
+    "session_end": "06:00:00",
+    "daily_close_time": "16:00:00"
+  },
+
+  "strategy": {
+    "hold_minutes": 5,
+    "wait_candles": 1,
+    "snake_fast_ema": 8,
+    "snake_slow_ema": 21,
+    "shingle_ema": 50,
+    "purple_line_ema": 34,
+    "squid_period": 13
+  },
+
+  "alerts": {
+    "enable_telegram": false,
+    "enable_email": false,
+    "log_level": "INFO",
+    "log_to_file": true,
+    "log_to_console": true
+  }
+}
