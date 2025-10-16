@@ -8,7 +8,7 @@ Usage:
 
 import argparse
 from datetime import datetime, timedelta
-from pain_gain_bot.backtest import Backtester
+from pain_gain_bot.backtest.historical_backtester import HistoricalBacktester
 
 def main():
     parser = argparse.ArgumentParser(description="Run backtest for Pain/Gain trading strategy")
@@ -81,8 +81,8 @@ def main():
     print(f"Initial balance: ${args.balance:.2f}")
     print(f"\nStarting backtest...\n")
 
-    # Run backtest
-    backtester = Backtester(
+    # Run backtest with new historical backtester
+    backtester = HistoricalBacktester(
         start_date=start_date.strftime('%Y-%m-%d'),
         end_date=end_date.strftime('%Y-%m-%d'),
         initial_balance=args.balance

@@ -148,16 +148,27 @@ The backtest exports a CSV file with all trades:
 
 ## Important Notes
 
+### ⚠️ Requirements
+
+**CRITICAL: You MUST have MetaTrader 5 open and logged in to run backtests!**
+
+The backtest:
+- ✅ Uses REAL historical data from MT5
+- ✅ Applies the exact 6-step strategy logic
+- ✅ Checks signals every 5 minutes
+- ✅ Calculates P/L from actual price movements
+- ✅ No future peeking - uses only past data
+
 ### ⚠️ Limitations
 
-1. **Simplified Execution**
-   - Real slippage and spread may differ
-   - Doesn't account for connection issues
-   - No partial fills
+1. **MT5 Required**
+   - MT5 must be running and logged in
+   - Backtest downloads historical bars from your MT5 terminal
 
-2. **Current Data**
-   - Uses current MT5 data (not true historical replay)
-   - For more accurate results, need tick-by-tick data
+2. **Simplified Execution**
+   - Assumes instant fills at close prices
+   - Doesn't account for real slippage/spread variations
+   - No connection issues simulated
 
 3. **Market Conditions**
    - Past performance ≠ future results
@@ -290,16 +301,16 @@ After successful backtesting:
 You can also import the backtester in Python:
 
 ```python
-from pain_gain_bot.backtest import Backtester
+from pain_gain_bot.backtest.historical_backtester import HistoricalBacktester
 
 # Create backtester
-bt = Backtester(
+bt = HistoricalBacktester(
     start_date='2025-01-01',
     end_date='2025-01-31',
     initial_balance=500.0
 )
 
-# Run backtest
+# Run backtest (requires MT5 to be open!)
 results = bt.run_backtest('PainX 400', bot_type='PAIN')
 
 # Access results
