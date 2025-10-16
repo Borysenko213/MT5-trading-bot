@@ -16,7 +16,7 @@ from ..config import config
 class GainBot:
     """
     GainBot handles BUY logic for GainX symbols
-    Trades: GainX400, GainX600, GainX800, GainX999
+    Trades: GainX 400, GainX 600, GainX 800, GainX 999
     """
 
     def __init__(self):

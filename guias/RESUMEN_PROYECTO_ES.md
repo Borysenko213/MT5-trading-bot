@@ -22,7 +22,7 @@ Se entregó exitosamente un sistema completo de trading automatizado con dos bot
 
 #### PainBot (Estrategia VENTA)
 - ✅ Detección automática de señales VENTA
-- ✅ Opera PainX400, PainX600, PainX800, PainX999
+- ✅ Opera PainX 400, PainX 600, PainX 800, PainX 999
 - ✅ Confirmación multi-temporalidad (D1→H4→H1→M30/M15→M5→M1)
 - ✅ Lógica de entrada ruptura-retesteo línea morada
 - ✅ Retención 5 minutos con re-entrada inteligente
@@ -30,7 +30,7 @@ Se entregó exitosamente un sistema completo de trading automatizado con dos bot
 
 #### GainBot (Estrategia COMPRA)
 - ✅ Detección automática de señales COMPRA
-- ✅ Opera GainX400, GainX600, GainX800, GainX999
+- ✅ Opera GainX 400, GainX 600, GainX 800, GainX 999
 - ✅ Confirmación multi-temporalidad (D1→H4→H1→M30/M15→M5→M1)
 - ✅ Lógica de entrada ruptura-retesteo línea morada
 - ✅ Retención 5 minutos con re-entrada inteligente

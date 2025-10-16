@@ -16,7 +16,7 @@ from ..config import config
 class PainBot:
     """
     PainBot handles SELL logic for PainX symbols
-    Trades: PainX400, PainX600, PainX800, PainX999
+    Trades: PainX 400, PainX 600, PainX 800, PainX 999
     """
 
     def __init__(self):

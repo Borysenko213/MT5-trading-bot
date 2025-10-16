@@ -18,16 +18,16 @@
   "symbols": {
     "_description": "Trading symbols for each bot",
     "pain_symbols": [
-      "PainX400",
-      "PainX600",
-      "PainX800",
-      "PainX999"
+      "PainX 400",
+      "PainX 600",
+      "PainX 800",
+      "PainX 999"
     ],
     "gain_symbols": [
-      "GainX400",
-      "GainX600",
-      "GainX800",
-      "GainX999"
+      "GainX 400",
+      "GainX 600",
+      "GainX 800",
+      "GainX 999"
     ],
     "_note": "You can trade all 8 symbols or select specific ones. Remove symbols from arrays to disable them."
   },

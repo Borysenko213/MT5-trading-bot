@@ -130,13 +130,13 @@ Every critical execution path now has `print()` statements for debugging.
 [OK] Configuration loaded from config.json
 [DEBUG] Broker server: Weltrade-Demo
 [DEBUG] Demo account: 19498321
-[DEBUG] Pain symbols: ['PainX400']
+[DEBUG] Pain symbols: ['PainX 400']
 [DEBUG] load_config() completed
 [DEBUG] Selected bot mode: pain
 [DEBUG] Calling run_pain_bot()...
 [DEBUG] Creating PainBot instance...
 [DEBUG] PainBot.__init__() started
-[DEBUG] Loading pain_symbols from config: ['PainX400']
+[DEBUG] Loading pain_symbols from config: ['PainX 400']
 [DEBUG] Creating SignalEngine...
 [DEBUG] Creating OrderManager...
 [DEBUG] PainBot.__init__() completed
@@ -153,7 +153,7 @@ Every critical execution path now has `print()` statements for debugging.
 [DEBUG] Attempting login: account=19498321, server=Weltrade-Demo, use_demo=True
 [DEBUG] mt5.login() succeeded
 [DEBUG] connector.initialize() succeeded
-[DEBUG] Calling connector.verify_symbols(['PainX400'])
+[DEBUG] Calling connector.verify_symbols(['PainX 400'])
 [DEBUG] Risk manager initialized: balance=$500.00
 [DEBUG] PainBot initialized successfully, calling run()...
 ```
@@ -187,16 +187,16 @@ Every critical execution path now has `print()` statements for debugging.
 [DEBUG] Inside trading session - proceeding
 [DEBUG] Managing existing positions
 [DEBUG] OrderManager.manage_positions() called, active positions: 0
-[DEBUG] Scanning 1 symbols: ['PainX400']
-[DEBUG] Processing symbol: PainX400
-[DEBUG] process_symbol(PainX400) called
-[DEBUG] Calling signal_engine.generate_signal(PainX400)
+[DEBUG] Scanning 1 symbols: ['PainX 400']
+[DEBUG] Processing symbol: PainX 400
+[DEBUG] process_symbol(PainX 400) called
+[DEBUG] Calling signal_engine.generate_signal(PainX 400)
 ```
 
 ### Signal Generation (All 6 Steps):
 ```
-[DEBUG] SignalEngine.generate_signal() called for PainX400
-[DEBUG] Step 1: Checking daily bias for PainX400
+[DEBUG] SignalEngine.generate_signal() called for PainX 400
+[DEBUG] Step 1: Checking daily bias for PainX 400
 [DEBUG] Analyzing daily bias (refresh needed)
 [DEBUG] Daily bias: SELL
 [DEBUG] Step 2: Checking daily stop condition
@@ -216,12 +216,12 @@ Every critical execution path now has `print()` statements for debugging.
 
 ### Order Execution:
 ```
-[DEBUG] OrderManager.execute_order() called: SELL 0.01 PainX400
-[DEBUG] Checking if can open new order for PainX400
+[DEBUG] OrderManager.execute_order() called: SELL 0.01 PainX 400
+[DEBUG] Checking if can open new order for PainX 400
 [DEBUG] can_open_new_order result: True, reason: OK
-[DEBUG] Sending order to MT5: SELL 0.01 PainX400
-[DEBUG] MT5Connector.send_order() called: SELL 0.01 PainX400
-[DEBUG] Getting symbol info for PainX400
+[DEBUG] Sending order to MT5: SELL 0.01 PainX 400
+[DEBUG] MT5Connector.send_order() called: SELL 0.01 PainX 400
+[DEBUG] Getting symbol info for PainX 400
 [DEBUG] Symbol info retrieved: spread=2
 [DEBUG] connector.send_order() result: {'ticket': 12345678, ...}
 ```

@@ -38,8 +38,8 @@ Create a file named `config.json` in the trading folder:
 1. Open MetaTrader 5
 2. Login to your demo account manually
 3. Add symbols to Market Watch:
-   - PainX400, 600, 800, 999
-   - GainX400, 600, 800, 999
+   - PainX 400, 600, 800, 999
+   - GainX 400, 600, 800, 999
 4. Enable automated trading:
    - Tools → Options → Expert Advisors
    - ✅ Allow automated trading

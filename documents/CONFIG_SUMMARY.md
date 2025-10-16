@@ -50,8 +50,8 @@ Your Pain/Gain trading system now has a **fully centralized configuration system
 ### ✅ **Trading Symbols**
 ```json
 {
-  "pain_symbols": ["PainX400", "PainX600", "PainX800", "PainX999"],
-  "gain_symbols": ["GainX400", "GainX600", "GainX800", "GainX999"]
+  "pain_symbols": ["PainX 400", "PainX 600", "PainX 800", "PainX 999"],
+  "gain_symbols": ["GainX 400", "GainX 600", "GainX 800", "GainX 999"]
 }
 ```
 - Trade all 8 symbols or select specific ones
@@ -167,8 +167,8 @@ Double-click: run_demo.bat
 {
   "broker": {"use_demo": true},
   "symbols": {
-    "pain_symbols": ["PainX400"],
-    "gain_symbols": ["GainX400"]
+    "pain_symbols": ["PainX 400"],
+    "gain_symbols": ["GainX 400"]
   },
   "risk": {
     "lot_size": 0.01,
@@ -347,7 +347,7 @@ Open config.json, set "enable_telegram": true, add token and chat_id, save
 
 ### Test Single Symbol
 ```json
-Change "pain_symbols" to ["PainX400"] and "gain_symbols" to ["GainX400"]
+Change "pain_symbols" to ["PainX 400"] and "gain_symbols" to ["GainX 400"]
 ```
 
 ---

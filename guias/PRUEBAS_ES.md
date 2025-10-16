@@ -118,8 +118,8 @@ import MetaTrader5 as mt5
 mt5.initialize()
 mt5.login(19498321, password="TU_CONTRASEÑA", server="Weltrade")
 
-symbols = ["PainX400", "PainX600", "PainX800", "PainX999",
-           "GainX400", "GainX600", "GainX800", "GainX999"]
+symbols = ["PainX 400", "PainX 600", "PainX 800", "PainX 999",
+           "GainX 400", "GainX 600", "GainX 800", "GainX 999"]
 
 for symbol in symbols:
     info = mt5.symbol_info(symbol)
@@ -145,7 +145,7 @@ from pain_gain_bot.indicators.technical import indicators
 
 connector.initialize(use_demo=True)
 
-symbol = "PainX400"
+symbol = "PainX 400"
 df_h1 = connector.get_bars(symbol, 'H1', count=100)
 
 # Probar indicador Snake
@@ -176,7 +176,7 @@ from pain_gain_bot.indicators.technical import indicators
 
 connector.initialize(use_demo=True)
 
-symbol = "PainX400"
+symbol = "PainX 400"
 df_d1 = connector.get_bars(symbol, 'D1', count=5)
 
 direction, wick_size, wick_50 = indicators.check_wick_direction(df_d1)
@@ -204,7 +204,7 @@ from pain_gain_bot.strategy.signals import SignalEngine
 connector.initialize(use_demo=True)
 
 engine = SignalEngine()
-symbol = "PainX400"
+symbol = "PainX 400"
 
 signal = engine.generate_signal(symbol)
 
@@ -234,7 +234,7 @@ connector.initialize(use_demo=True)
 engine = SignalEngine()
 
 for i in range(60):  # 60 iteraciones = 30 minutos
-    signal = engine.generate_signal('PainX400')
+    signal = engine.generate_signal('PainX 400')
     if signal['action']:
         print(f'SEÑAL: {signal}')
     time.sleep(30)
@@ -255,11 +255,11 @@ connector.shutdown()
 from pain_gain_bot.data.mt5_connector import connector
 
 connector.initialize(use_demo=True)
-connector.verify_symbols(["PainX400"])
+connector.verify_symbols(["PainX 400"])
 
 # Colocar orden de prueba mínima
 result = connector.send_order(
-    symbol="PainX400",
+    symbol="PainX 400",
     order_type="SELL",
     volume=0.01,  # Lote mínimo
     magic=999999,
@@ -296,7 +296,7 @@ order_mgr = OrderManager("PAIN", 100000)
 
 # Probar ejecución de orden
 result = order_mgr.execute_order(
-    symbol="PainX400",
+    symbol="PainX 400",
     action="SELL",
     volume=0.01
 )
@@ -423,8 +423,8 @@ Después de 24-48 horas de trading demo:
     "use_demo": false  // ⚠️ MODO REAL
   },
   "symbols": {
-    "pain_symbols": ["PainX400"],  // Solo un símbolo
-    "gain_symbols": ["GainX400"]   // Solo un símbolo
+    "pain_symbols": ["PainX 400"],  // Solo un símbolo
+    "gain_symbols": ["GainX 400"]   // Solo un símbolo
   },
   "risk": {
     "lot_size": 0.01,  // LOTE MÍNIMO

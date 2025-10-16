@@ -84,16 +84,16 @@ python -m pain_gain_bot.main --bot both --config config.json
 {
   "symbols": {
     "pain_symbols": [
-      "PainX400",
-      "PainX600",
-      "PainX800",
-      "PainX999"
+      "PainX 400",
+      "PainX 600",
+      "PainX 800",
+      "PainX 999"
     ],
     "gain_symbols": [
-      "GainX400",
-      "GainX600",
-      "GainX800",
-      "GainX999"
+      "GainX 400",
+      "GainX 600",
+      "GainX 800",
+      "GainX 999"
     ]
   }
 }
@@ -101,19 +101,19 @@ python -m pain_gain_bot.main --bot both --config config.json
 
 **Ejemplos de Personalización:**
 
-Operar solo PainX400 y GainX400:
+Operar solo PainX 400 y GainX 400:
 ```json
 {
-  "pain_symbols": ["PainX400"],
-  "gain_symbols": ["GainX400"]
+  "pain_symbols": ["PainX 400"],
+  "gain_symbols": ["GainX 400"]
 }
 ```
 
 Operar solo símbolos de alta volatilidad:
 ```json
 {
-  "pain_symbols": ["PainX800", "PainX999"],
-  "gain_symbols": ["GainX800", "GainX999"]
+  "pain_symbols": ["PainX 800", "PainX 999"],
+  "gain_symbols": ["GainX 800", "GainX 999"]
 }
 ```
 
@@ -306,8 +306,8 @@ Operar solo símbolos de alta volatilidad:
 {
   "broker": {"use_demo": true},
   "symbols": {
-    "pain_symbols": ["PainX400"],
-    "gain_symbols": ["GainX400"]
+    "pain_symbols": ["PainX 400"],
+    "gain_symbols": ["GainX 400"]
   },
   "risk": {
     "lot_size": 0.01,
@@ -344,8 +344,8 @@ Operar solo símbolos de alta volatilidad:
 {
   "broker": {"use_demo": false},
   "symbols": {
-    "pain_symbols": ["PainX400", "PainX600"],
-    "gain_symbols": ["GainX400", "GainX600"]
+    "pain_symbols": ["PainX 400", "PainX 600"],
+    "gain_symbols": ["GainX 400", "GainX 600"]
   },
   "risk": {
     "lot_size": 0.01,

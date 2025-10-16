@@ -22,7 +22,7 @@ Successfully delivered a complete dual-bot automated trading system implementing
 
 #### PainBot (SELL Strategy)
 - ✅ Automated SELL signal detection
-- ✅ Trades PainX400, PainX600, PainX800, PainX999
+- ✅ Trades PainX 400, PainX 600, PainX 800, PainX 999
 - ✅ Multi-timeframe confirmation (D1→H4→H1→M30/M15→M5→M1)
 - ✅ Purple line break-retest entry logic
 - ✅ 5-minute hold with intelligent re-entry
@@ -30,7 +30,7 @@ Successfully delivered a complete dual-bot automated trading system implementing
 
 #### GainBot (BUY Strategy)
 - ✅ Automated BUY signal detection
-- ✅ Trades GainX400, GainX600, GainX800, GainX999
+- ✅ Trades GainX 400, GainX 600, GainX 800, GainX 999
 - ✅ Multi-timeframe confirmation (D1→H4→H1→M30/M15→M5→M1)
 - ✅ Purple line break-retest entry logic
 - ✅ 5-minute hold with intelligent re-entry

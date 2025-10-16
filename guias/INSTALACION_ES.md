@@ -90,8 +90,8 @@ Debería mostrar información de versión de pip.
 1. Clic derecho en Market Watch
 2. Selecciona "Symbols"
 3. Busca y agrega:
-   - PainX400, PainX600, PainX800, PainX999
-   - GainX400, GainX600, GainX800, GainX999
+   - PainX 400, PainX 600, PainX 800, PainX 999
+   - GainX 400, GainX 600, GainX 800, GainX 999
 
 ---
 
@@ -202,8 +202,8 @@ Crea un archivo llamado `config.json` en la carpeta trading:
     "use_demo": true
   },
   "symbols": {
-    "pain_symbols": ["PainX400", "PainX600", "PainX800", "PainX999"],
-    "gain_symbols": ["GainX400", "GainX600", "GainX800", "GainX999"]
+    "pain_symbols": ["PainX 400", "PainX 600", "PainX 800", "PainX 999"],
+    "gain_symbols": ["GainX 400", "GainX 600", "GainX 800", "GainX 999"]
   },
   "risk": {
     "lot_size": 0.10,

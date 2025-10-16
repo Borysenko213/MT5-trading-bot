@@ -80,8 +80,8 @@ Edit `pain_gain_bot/config.py` or create `config.json`:
     "use_demo": true
   },
   "symbols": {
-    "pain_symbols": ["PainX400", "PainX600", "PainX800", "PainX999"],
-    "gain_symbols": ["GainX400", "GainX600", "GainX800", "GainX999"]
+    "pain_symbols": ["PainX 400", "PainX 600", "PainX 800", "PainX 999"],
+    "gain_symbols": ["GainX 400", "GainX 600", "GainX 800", "GainX 999"]
   },
   "risk": {
     "lot_size": 0.10,

@@ -54,7 +54,7 @@ All execution flow now has `print()` statements to track where code blocks.
 [OK] Configuration loaded from config.json
 [DEBUG] Broker server: Weltrade-Demo
 [DEBUG] Demo account: 19498321
-[DEBUG] Pain symbols: ['PainX400']
+[DEBUG] Pain symbols: ['PainX 400']
 [DEBUG] load_config() completed
 [DEBUG] Selected bot mode: pain
 [DEBUG] Calling run_pain_bot()...
@@ -65,7 +65,7 @@ All execution flow now has `print()` statements to track where code blocks.
 ```
 [DEBUG] Creating PainBot instance...
 [DEBUG] PainBot.__init__() started
-[DEBUG] Loading pain_symbols from config: ['PainX400']
+[DEBUG] Loading pain_symbols from config: ['PainX 400']
 [DEBUG] Creating SignalEngine...
 [DEBUG] Creating OrderManager...
 [DEBUG] PainBot.__init__() completed
@@ -94,7 +94,7 @@ All execution flow now has `print()` statements to track where code blocks.
 [DEBUG] Attempting login: account=19498321, server=Weltrade-Demo, use_demo=True
 [DEBUG] mt5.login() succeeded
 [DEBUG] connector.initialize() succeeded
-[DEBUG] Calling connector.verify_symbols(['PainX400'])
+[DEBUG] Calling connector.verify_symbols(['PainX 400'])
 [DEBUG] PainBot initialized successfully, calling run()...
 ```
 
@@ -120,17 +120,17 @@ All execution flow now has `print()` statements to track where code blocks.
 ```
 [DEBUG] Inside trading session - proceeding
 [DEBUG] Managing existing positions
-[DEBUG] Scanning 1 symbols: ['PainX400']
-[DEBUG] Processing symbol: PainX400
-[DEBUG] process_symbol(PainX400) called
-[DEBUG] Calling signal_engine.generate_signal(PainX400)
+[DEBUG] Scanning 1 symbols: ['PainX 400']
+[DEBUG] Processing symbol: PainX 400
+[DEBUG] process_symbol(PainX 400) called
+[DEBUG] Calling signal_engine.generate_signal(PainX 400)
 ```
 
 ### Phase 5: Signal Generation (6 Steps)
 
 ```
-[DEBUG] SignalEngine.generate_signal() called for PainX400
-[DEBUG] Step 1: Checking daily bias for PainX400
+[DEBUG] SignalEngine.generate_signal() called for PainX 400
+[DEBUG] Step 1: Checking daily bias for PainX 400
 [DEBUG] Analyzing daily bias (refresh needed)
 [DEBUG] Daily bias: SELL
 [DEBUG] Step 2: Checking daily stop condition
@@ -197,7 +197,7 @@ Look for the **LAST** `[DEBUG]` message. That's where execution stopped.
 [DEBUG] Checking daily limits
 [DEBUG] Can trade: True, reason: OK
 [DEBUG] Inside trading session - proceeding
-[DEBUG] Processing symbol: PainX400
+[DEBUG] Processing symbol: PainX 400
 [DEBUG] Step 1: Checking daily bias
 [DEBUG] Daily bias: SELL
 [DEBUG] Step 2: Checking daily stop condition
@@ -262,7 +262,7 @@ Look for the **LAST** `[DEBUG]` message. That's where execution stopped.
 ### No Signal (Most Common)
 
 ```
-[DEBUG] SignalEngine.generate_signal() called for PainX400
+[DEBUG] SignalEngine.generate_signal() called for PainX 400
 [DEBUG] Step 1: Checking daily bias
 [DEBUG] Daily bias: SELL
 [DEBUG] Step 2: Checking daily stop condition
@@ -372,7 +372,7 @@ python -m pain_gain_bot.main --bot pain --demo 2>&1 | grep -E "Step [1-6]"
 [DEBUG] === Iteration 1 ===
 [DEBUG] Can trade: True
 [DEBUG] Inside trading session - proceeding
-[DEBUG] Processing symbol: PainX400
+[DEBUG] Processing symbol: PainX 400
 [DEBUG] SignalEngine.generate_signal() called
 [DEBUG] Step 1: Daily bias: SELL
 [DEBUG] Step 2: Daily stop: OK

@@ -26,9 +26,9 @@ class SymbolConfig:
 
     def __post_init__(self):
         if self.pain_symbols is None:
-            self.pain_symbols = ["PainX400", "PainX600", "PainX800", "PainX999"]
+            self.pain_symbols = ["PainX 400", "PainX 600", "PainX 800", "PainX 999"]
         if self.gain_symbols is None:
-            self.gain_symbols = ["GainX400", "GainX600", "GainX800", "GainX999"]
+            self.gain_symbols = ["GainX 400", "GainX 600", "GainX 800", "GainX 999"]
 
 @dataclass
 class RiskConfig:

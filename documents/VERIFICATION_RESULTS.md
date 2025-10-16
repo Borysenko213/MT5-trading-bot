@@ -51,7 +51,7 @@ I have successfully tested and verified the entire project. Everything is workin
 - ✅ All parameters validated
 - ✅ Demo mode enabled (safety first!)
 - ✅ Broker: Weltrade
-- ✅ Symbols: PainX400, GainX400 (test config)
+- ✅ Symbols: PainX 400, GainX 400 (test config)
 
 ### **6. Documentation** ✅
 - ✅ README.md (Project overview)

@@ -25,7 +25,7 @@ Your complete automated trading system has been built from the ground up and is 
 - Purple line break-retest entry logic
 - 5-minute hold with re-entry timing
 - Daily wick-based stop conditions
-- **Symbols:** PainX400, PainX600, PainX800, PainX999
+- **Symbols:** PainX 400, PainX 600, PainX 800, PainX 999
 
 #### **GainBot** - BUY Strategy
 - Automated BUY signal detection for GainX symbols
@@ -33,7 +33,7 @@ Your complete automated trading system has been built from the ground up and is 
 - Purple line break-retest entry logic
 - 5-minute hold with re-entry timing
 - Daily wick-based stop conditions
-- **Symbols:** GainX400, GainX600, GainX800, GainX999
+- **Symbols:** GainX 400, GainX 600, GainX 800, GainX 999
 
 ### ✅ **2. Complete Source Code (16 Python Files)**
 

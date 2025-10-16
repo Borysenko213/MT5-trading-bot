@@ -50,11 +50,11 @@ Entendiendo qué hace el bot desde que lo ejecutas hasta que coloca una operaci�
 
 ### Paso 1.3: Verificación de Símbolos
 ```
-18:05:01 | INFO | [OK] Symbol PainX400 verified
+18:05:01 | INFO | [OK] Symbol PainX 400 verified
 ```
 
 **¿Qué hace?**
-1. Para cada símbolo en config (PainX400, PainX600, etc.)
+1. Para cada símbolo en config (PainX 400, PainX 600, etc.)
 2. Verifica que existe en MT5
 3. Lo activa en Market Watch si no está
 4. Obtiene información (spread, tick size, etc.)
@@ -135,7 +135,7 @@ Si ya tienes operaciones abiertas, las gestiona:
 **Mensajes:**
 ```
 18:07:00 | INFO | Managing position #12345678
-18:07:00 | INFO |   Symbol: PainX400
+18:07:00 | INFO |   Symbol: PainX 400
 18:07:00 | INFO |   Type: SELL
 18:07:00 | INFO |   Entry: 145.234
 18:07:00 | INFO |   Current: 145.180
@@ -160,7 +160,7 @@ Si es momento de cerrar:
 Si no hay posiciones abiertas (o ya pasó el tiempo de espera), busca nuevas señales:
 
 ```
-18:06:15 | INFO | PainX400: Scanning for SELL signals...
+18:06:15 | INFO | PainX 400: Scanning for SELL signals...
 ```
 
 **Aquí empieza el análisis multi-temporalidad:**
@@ -171,8 +171,8 @@ Si no hay posiciones abiertas (o ya pasó el tiempo de espera), busca nuevas se�
 
 ### Paso 3.1: Análisis D1 (Daily)
 ```
-18:06:16 | INFO | PainX400: D1 - Checking wick direction...
-18:06:16 | INFO | PainX400: D1 wick = DOWN (lower wick larger)
+18:06:16 | INFO | PainX 400: D1 - Checking wick direction...
+18:06:16 | INFO | PainX 400: D1 wick = DOWN (lower wick larger)
 ```
 
 **¿Qué hace?**
@@ -198,14 +198,14 @@ Si no hay posiciones abiertas (o ya pasó el tiempo de espera), busca nuevas se�
 O:
 ```
 18:06:16 | INFO | D1: FAIL - Upper wick (necesitamos lower wick para SELL)
-18:06:16 | INFO | PainX400: No signal
+18:06:16 | INFO | PainX 400: No signal
 ```
 
 ---
 
 ### Paso 3.2: Análisis H4 (4 Horas)
 ```
-18:06:17 | INFO | PainX400: H4 - Checking Fibonacci 50%...
+18:06:17 | INFO | PainX 400: H4 - Checking Fibonacci 50%...
 ```
 
 **¿Qué hace?**
@@ -236,14 +236,14 @@ O:
 O si falla:
 ```
 18:06:17 | INFO | H4: FAIL - Did not reach 50% Fibonacci
-18:06:17 | INFO | PainX400: No signal
+18:06:17 | INFO | PainX 400: No signal
 ```
 
 ---
 
 ### Paso 3.3: Análisis H1 (1 Hora)
 ```
-18:06:18 | INFO | PainX400: H1 - Checking Shingle position...
+18:06:18 | INFO | PainX 400: H1 - Checking Shingle position...
 ```
 
 **¿Qué hace?**
@@ -272,7 +272,7 @@ O si falla:
 
 ### Paso 3.4: Análisis M30 y M15 (Snake)
 ```
-18:06:19 | INFO | PainX400: M30/M15 - Checking Snake color...
+18:06:19 | INFO | PainX 400: M30/M15 - Checking Snake color...
 ```
 
 **¿Qué hace?**
@@ -303,14 +303,14 @@ Si uno falla:
 18:06:19 | INFO | M30 Snake: RED
 18:06:19 | INFO | M15 Snake: GREEN ← PROBLEMA
 18:06:19 | INFO | M30/M15: FAIL - Colors don't match
-18:06:19 | INFO | PainX400: No signal
+18:06:19 | INFO | PainX 400: No signal
 ```
 
 ---
 
 ### Paso 3.5: Análisis M5 y M1 (Purple Line Break-Retest)
 ```
-18:06:20 | INFO | PainX400: M5/M1 - Checking purple line pattern...
+18:06:20 | INFO | PainX 400: M5/M1 - Checking purple line pattern...
 ```
 
 **¿Qué hace?**
@@ -355,7 +355,7 @@ Si **TODAS** las confirmaciones pasaron:
 
 ```
 18:06:21 | INFO | ========================================
-18:06:21 | INFO | [*] SIGNAL DETECTED: PainX400
+18:06:21 | INFO | [*] SIGNAL DETECTED: PainX 400
 18:06:21 | INFO | ========================================
 18:06:21 | INFO | Action: SELL
 18:06:21 | INFO | Price: 145.234
@@ -414,7 +414,7 @@ lot_size = 0.01  # Lo que configuraste
 
 ### Paso 5.3: Envío de Orden a MT5
 ```
-18:06:23 | INFO | Sending SELL order for PainX400...
+18:06:23 | INFO | Sending SELL order for PainX 400...
 18:06:23 | INFO |   Volume: 0.01 lots
 18:06:23 | INFO |   Price: 145.234
 ```
@@ -424,7 +424,7 @@ lot_size = 0.01  # Lo que configuraste
 # Llama a MT5 API:
 mt5.order_send({
     'action': mt5.TRADE_ACTION_DEAL,
-    'symbol': 'PainX400',
+    'symbol': 'PainX 400',
     'volume': 0.01,
     'type': mt5.ORDER_TYPE_SELL,
     'price': 145.234,
@@ -444,7 +444,7 @@ mt5.order_send({
 18:06:24 | INFO | [OK] ORDER EXECUTED
 18:06:24 | INFO | ========================================
 18:06:24 | INFO | Ticket: #12345678
-18:06:24 | INFO | Symbol: PainX400
+18:06:24 | INFO | Symbol: PainX 400
 18:06:24 | INFO | Type: SELL
 18:06:24 | INFO | Volume: 0.01 lots
 18:06:24 | INFO | Entry Price: 145.234
@@ -554,7 +554,7 @@ Durante este tiempo:
 Si detecta señal nuevamente:
 
 ```
-18:16:30 | INFO | Signal detected again on PainX400
+18:16:30 | INFO | Signal detected again on PainX 400
 18:16:30 | INFO | Wait period: OK
 18:16:30 | INFO | This would be entry #2 (max 3 consecutive)
 18:16:30 | INFO | Purple line position: OK

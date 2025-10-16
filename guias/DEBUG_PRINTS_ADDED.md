@@ -39,7 +39,7 @@ I've added `print()` statements (like console.log) throughout the code to help y
 [DEBUG] Calling run_pain_bot()...
 [DEBUG] Creating PainBot instance...
 [DEBUG] PainBot.__init__() started
-[DEBUG] Loading pain_symbols from config: ['PainX400']
+[DEBUG] Loading pain_symbols from config: ['PainX 400']
 [DEBUG] Creating SignalEngine...
 [DEBUG] Creating OrderManager...
 [DEBUG] PainBot.__init__() completed
@@ -52,7 +52,7 @@ I've added `print()` statements (like console.log) throughout the code to help y
 [DEBUG] Attempting login: account=19498321, server=Weltrade-Demo, use_demo=True
 [DEBUG] mt5.login() succeeded
 [DEBUG] connector.initialize() succeeded
-[DEBUG] Calling connector.verify_symbols(['PainX400'])
+[DEBUG] Calling connector.verify_symbols(['PainX 400'])
 [DEBUG] PainBot initialized successfully, calling run()...
 ```
 
@@ -63,7 +63,7 @@ I've added `print()` statements (like console.log) throughout the code to help y
 [DEBUG] Calling run_pain_bot()...
 [DEBUG] Creating PainBot instance...
 [DEBUG] PainBot.__init__() started
-[DEBUG] Loading pain_symbols from config: ['PainX400']
+[DEBUG] Loading pain_symbols from config: ['PainX 400']
 [DEBUG] Creating SignalEngine...
 [DEBUG] Creating OrderManager...
 [DEBUG] PainBot.__init__() completed
@@ -134,7 +134,7 @@ Example:
 
 ### Block Point 3: Symbol Verification
 ```
-[DEBUG] Calling connector.verify_symbols(['PainX400'])
+[DEBUG] Calling connector.verify_symbols(['PainX 400'])
 (No "succeeded" message after)
 ```
 **Problem:** Symbol not found or not visible

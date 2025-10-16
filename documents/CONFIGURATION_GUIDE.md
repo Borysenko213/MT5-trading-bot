@@ -95,16 +95,16 @@ The bot will automatically look for it there.
 {
   "symbols": {
     "pain_symbols": [
-      "PainX400",
-      "PainX600",
-      "PainX800",
-      "PainX999"
+      "PainX 400",
+      "PainX 600",
+      "PainX 800",
+      "PainX 999"
     ],
     "gain_symbols": [
-      "GainX400",
-      "GainX600",
-      "GainX800",
-      "GainX999"
+      "GainX 400",
+      "GainX 600",
+      "GainX 800",
+      "GainX 999"
     ]
   }
 }
@@ -112,19 +112,19 @@ The bot will automatically look for it there.
 
 **Customization Examples:**
 
-Trade only PainX400 and GainX400:
+Trade only PainX 400 and GainX 400:
 ```json
 {
-  "pain_symbols": ["PainX400"],
-  "gain_symbols": ["GainX400"]
+  "pain_symbols": ["PainX 400"],
+  "gain_symbols": ["GainX 400"]
 }
 ```
 
 Trade only high-volatility symbols:
 ```json
 {
-  "pain_symbols": ["PainX800", "PainX999"],
-  "gain_symbols": ["GainX800", "GainX999"]
+  "pain_symbols": ["PainX 800", "PainX 999"],
+  "gain_symbols": ["GainX 800", "GainX 999"]
 }
 ```
 
@@ -387,8 +387,8 @@ Trade only high-volatility symbols:
     "use_demo": true
   },
   "symbols": {
-    "pain_symbols": ["PainX400"],
-    "gain_symbols": ["GainX400"]
+    "pain_symbols": ["PainX 400"],
+    "gain_symbols": ["GainX 400"]
   },
   "risk": {
     "lot_size": 0.01,
@@ -429,8 +429,8 @@ Trade only high-volatility symbols:
     "use_demo": false
   },
   "symbols": {
-    "pain_symbols": ["PainX400", "PainX600"],
-    "gain_symbols": ["GainX400", "GainX600"]
+    "pain_symbols": ["PainX 400", "PainX 600"],
+    "gain_symbols": ["GainX 400", "GainX 600"]
   },
   "risk": {
     "lot_size": 0.01,

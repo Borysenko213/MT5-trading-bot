@@ -19,7 +19,7 @@ Archivo `config.json` ya está creado con:
 - Cuenta demo: 19498321
 - Servidor: Weltrade
 - Contraseña configurada
-- Símbolos: PainX400, GainX400
+- Símbolos: PainX 400, GainX 400
 - Lote mínimo: 0.01
 - Stop diario: $5 USD
 
@@ -91,7 +91,7 @@ run_pain_demo.bat
 18:04:42 | INFO     | Configuration Summary:
 18:04:42 | INFO     |   Mode: DEMO
 18:04:42 | INFO     |   Broker: Weltrade
-18:04:42 | INFO     |   Pain Symbols: PainX400
+18:04:42 | INFO     |   Pain Symbols: PainX 400
 18:04:42 | INFO     |   Lot Size: 0.01
 18:04:42 | INFO     |   Daily Stop: $5.0
 18:04:42 | INFO     |   Daily Target: $10.0
@@ -103,25 +103,25 @@ run_pain_demo.bat
 18:05:00 | INFO     | [OK] Account: 19498321
 18:05:00 | INFO     | [OK] Balance: $500.00
 18:05:00 | INFO     | [OK] Server: Weltrade
-18:05:01 | INFO     | [OK] Symbol PainX400 verified
+18:05:01 | INFO     | [OK] Symbol PainX 400 verified
 18:05:01 | INFO     | === PainBot Started Successfully ===
-18:05:01 | INFO     | Monitoring PainX400 for SELL signals...
+18:05:01 | INFO     | Monitoring PainX 400 for SELL signals...
 ```
 
 ### Mensajes Normales Durante Operación:
 
 ```
 18:06:15 | INFO     | [Iteration 1] Scanning symbols...
-18:06:15 | INFO     | PainX400: Analyzing D1 timeframe...
-18:06:16 | INFO     | PainX400: D1 wick direction = DOWN
-18:06:16 | INFO     | PainX400: Checking H4 Fibonacci...
-18:06:17 | INFO     | PainX400: No signal - H1 shingle not aligned
+18:06:15 | INFO     | PainX 400: Analyzing D1 timeframe...
+18:06:16 | INFO     | PainX 400: D1 wick direction = DOWN
+18:06:16 | INFO     | PainX 400: Checking H4 Fibonacci...
+18:06:17 | INFO     | PainX 400: No signal - H1 shingle not aligned
 ```
 
 ### Si Encuentra una Señal:
 
 ```
-18:12:30 | INFO     | [*] SIGNAL DETECTED: PainX400
+18:12:30 | INFO     | [*] SIGNAL DETECTED: PainX 400
 18:12:30 | INFO     |   Action: SELL
 18:12:30 | INFO     |   Price: 145.234
 18:12:30 | INFO     |   All confirmations: PASS
@@ -161,8 +161,8 @@ Encontrarás:
     "use_demo": true
   },
   "symbols": {
-    "pain_symbols": ["PainX400"],  // Solo 1 símbolo para pruebas
-    "gain_symbols": ["GainX400"]
+    "pain_symbols": ["PainX 400"],  // Solo 1 símbolo para pruebas
+    "gain_symbols": ["GainX 400"]
   },
   "risk": {
     "lot_size": 0.01,              // Lote mínimo
@@ -209,7 +209,7 @@ Antes de ejecutar el bot, verifica:
 - [ ] MetaTrader 5 está abierto
 - [ ] MT5 está conectado (luz verde)
 - [ ] Cuenta demo visible en MT5
-- [ ] Símbolos PainX400/GainX400 visibles en Market Watch
+- [ ] Símbolos PainX 400/GainX 400 visibles en Market Watch
 - [ ] Archivo config.json existe
 - [ ] Terminal/CMD abierta en carpeta del proyecto
 
