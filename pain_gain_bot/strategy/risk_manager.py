@@ -23,11 +23,15 @@ class RiskManager:
 
     def initialize(self):
         """Initialize risk manager with current account balance"""
+        print("[DEBUG] RiskManager.initialize() called")
         account_info = connector.get_account_info()
         if account_info:
             self.daily_start_balance = account_info['balance']
             self.last_reset_date = datetime.now().date()
             logger.info(f"Risk Manager initialized: Start balance ${self.daily_start_balance:.2f}")
+            print(f"[DEBUG] Risk manager initialized: balance=${self.daily_start_balance:.2f}")
+        else:
+            print("[DEBUG] Failed to get account info for risk manager initialization")
 
     def check_daily_reset(self):
         """Check if we need to reset daily counters (new trading day)"""
@@ -72,13 +76,16 @@ class RiskManager:
         Returns:
             (can_trade, reason)
         """
+        print("[DEBUG] RiskManager.check_daily_limits() called")
         self.update_daily_pnl()
+        print(f"[DEBUG] Daily P/L: profit=${self.daily_profit:.2f}, loss=${self.daily_loss:.2f}")
 
         # Check daily loss limit
         if self.daily_loss >= config.risk.daily_stop_usd:
             self.trading_halted = True
             self.halt_reason = f"Daily loss limit reached: ${self.daily_loss:.2f} >= ${config.risk.daily_stop_usd:.2f}"
             logger.warning(f"[!] TRADING HALTED: {self.halt_reason}")
+            print(f"[DEBUG] DAILY LOSS LIMIT HIT: {self.halt_reason}")
             return False, self.halt_reason
 
         # Check daily profit target
@@ -86,11 +93,14 @@ class RiskManager:
             self.trading_halted = True
             self.halt_reason = f"Daily profit target reached: ${self.daily_profit:.2f} >= ${config.risk.daily_target_usd:.2f}"
             logger.info(f"[OK] TRADING HALTED: {self.halt_reason}")
+            print(f"[DEBUG] DAILY PROFIT TARGET HIT: {self.halt_reason}")
             return False, self.halt_reason
 
         if self.trading_halted:
+            print(f"[DEBUG] Trading halted: {self.halt_reason}")
             return False, self.halt_reason
 
+        print("[DEBUG] Daily limits OK - can trade")
         return True, "OK"
 
     def calculate_position_size(self, symbol: str, account_balance: float) -> float:
@@ -172,9 +182,12 @@ class RiskManager:
         # Handle overnight sessions (e.g., 19:00 to 06:00)
         if session_start > session_end:
             # Session crosses midnight
-            return now >= session_start or now <= session_end
+            in_session = now >= session_start or now <= session_end
         else:
-            return session_start <= now <= session_end
+            in_session = session_start <= now <= session_end
+
+        print(f"[DEBUG] is_trading_session(): now={now}, session={session_start}-{session_end}, in_session={in_session}")
+        return in_session
 
     def get_daily_stats(self) -> Dict:
         """Get current daily statistics"""

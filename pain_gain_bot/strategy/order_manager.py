@@ -108,15 +108,20 @@ class OrderManager:
         Returns:
             Order result or None
         """
+        print(f"[DEBUG] OrderManager.execute_order() called: {action} {volume} {symbol}")
         try:
             # Final validation
+            print(f"[DEBUG] Checking if can open new order for {symbol}")
             can_open, reason = self.can_open_new_order(symbol)
+            print(f"[DEBUG] can_open_new_order result: {can_open}, reason: {reason}")
             if not can_open:
                 logger.warning(f"Cannot open order for {symbol}: {reason}")
+                print(f"[DEBUG] Cannot open order - returning None")
                 return None
 
             # Send order
             comment = f"{self.bot_type}Bot|{datetime.now().strftime('%H%M%S')}"
+            print(f"[DEBUG] Sending order to MT5: {action} {volume} {symbol}")
 
             result = connector.send_order(
                 symbol=symbol,
@@ -127,6 +132,7 @@ class OrderManager:
                 magic=self.magic_number,
                 comment=comment
             )
+            print(f"[DEBUG] connector.send_order() result: {result}")
 
             if result:
                 # Track order
@@ -239,16 +245,22 @@ class OrderManager:
         Monitor and manage all active positions
         Call this method periodically
         """
+        print(f"[DEBUG] OrderManager.manage_positions() called, active positions: {len(self.active_positions)}")
         tickets_to_close = []
 
         for ticket in list(self.active_positions.keys()):
+            print(f"[DEBUG] Checking exit conditions for ticket {ticket}")
             should_close, reason = self.check_exit_conditions(ticket)
+            print(f"[DEBUG] Ticket {ticket}: should_close={should_close}, reason={reason}")
 
             if should_close:
                 tickets_to_close.append((ticket, reason))
 
         # Close positions
+        if tickets_to_close:
+            print(f"[DEBUG] Closing {len(tickets_to_close)} positions")
         for ticket, reason in tickets_to_close:
+            print(f"[DEBUG] Closing ticket {ticket}, reason: {reason}")
             self.close_position(ticket, reason)
 
     def reset_daily_counters(self):

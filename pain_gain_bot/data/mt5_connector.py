@@ -239,12 +239,17 @@ class MT5Connector:
         Returns:
             Order result dictionary or None
         """
+        print(f"[DEBUG] MT5Connector.send_order() called: {order_type} {volume} {symbol}")
         try:
             # Get symbol info
+            print(f"[DEBUG] Getting symbol info for {symbol}")
             symbol_info = mt5.symbol_info(symbol)
             if symbol_info is None:
                 logger.error(f"Symbol {symbol} not found")
+                print(f"[DEBUG] Symbol info is None - symbol not found")
                 return None
+
+            print(f"[DEBUG] Symbol info retrieved: spread={symbol_info.spread}")
 
             # Check spread
             current_spread = symbol_info.spread * symbol_info.point
