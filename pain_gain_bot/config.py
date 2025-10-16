@@ -187,20 +187,20 @@ def load_config(filepath: str = "config.json"):
             print(f"[DEBUG] daily_close_time converted: {session_data['daily_close_time']}")
 
         print("[DEBUG] Creating Config object...")
-        config = Config(
-            broker=BrokerConfig(**data.get('broker', {})),
-            symbols=SymbolConfig(**data.get('symbols', {})),
-            risk=RiskConfig(**data.get('risk', {})),
-            session=SessionConfig(**session_data),
-            strategy=StrategyConfig(**data.get('strategy', {})),
-            backtest=BacktestConfig(**data.get('backtest', {})),
-            alerts=AlertConfig(**data.get('alerts', {}))
-        )
+        # Update global config object
+        config.broker = BrokerConfig(**data.get('broker', {}))
+        config.symbols = SymbolConfig(**data.get('symbols', {}))
+        config.risk = RiskConfig(**data.get('risk', {}))
+        config.session = SessionConfig(**session_data)
+        config.strategy = StrategyConfig(**data.get('strategy', {}))
+        config.backtest = BacktestConfig(**data.get('backtest', {}))
+        config.alerts = AlertConfig(**data.get('alerts', {}))
 
         print(f"[OK] Configuration loaded from {filepath}")
         print(f"[DEBUG] Broker server: {config.broker.server}")
         print(f"[DEBUG] Demo account: {config.broker.demo_account}")
         print(f"[DEBUG] Pain symbols: {config.symbols.pain_symbols}")
+        print(f"[DEBUG] Session times: {config.session.session_start} - {config.session.session_end}")
 
     except FileNotFoundError:
         print(f"[DEBUG] FileNotFoundError: {filepath} not found")
