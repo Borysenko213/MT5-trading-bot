@@ -145,7 +145,7 @@ class HistoricalBacktester:
         # Return last 'count' bars
         return df_filtered.tail(count)
 
-    def check_signal_at_time(self, symbol: str, check_time: datetime, bot_type: str) -> Optional[Dict]:
+    def check_signal_at_time(self, symbol: str, check_time: datetime, bot_type: str, verbose: bool = False) -> Optional[Dict]:
         """
         Check for trading signal at a specific point in time using historical data
 
@@ -153,6 +153,7 @@ class HistoricalBacktester:
             symbol: Trading symbol
             check_time: Time to check signal
             bot_type: 'PAIN' (SELL) or 'GAIN' (BUY)
+            verbose: Print detailed step-by-step info
 
         Returns:
             Signal dictionary or None
@@ -163,6 +164,8 @@ class HistoricalBacktester:
             # Step 1: Daily bias from D1
             df_d1 = self.get_bars_up_to(symbol, 'D1', check_time, count=5)
             if df_d1 is None or len(df_d1) < 2:
+                if verbose:
+                    print(f"[VERBOSE] {check_time}: No D1 data")
                 return None
 
             direction, wick_size, wick_50_level = indicators.check_wick_direction(df_d1)
@@ -172,18 +175,32 @@ class HistoricalBacktester:
             elif direction == 'DOWN':
                 daily_bias = 'SELL'
             else:
+                if verbose:
+                    print(f"[VERBOSE] {check_time}: No daily bias detected")
                 return None
 
             # Filter by bot type
             if bot_type == 'PAIN' and daily_bias != 'SELL':
+                if verbose:
+                    print(f"[VERBOSE] {check_time}: Daily bias is {daily_bias}, need SELL for PAIN bot")
                 return None
             if bot_type == 'GAIN' and daily_bias != 'BUY':
+                if verbose:
+                    print(f"[VERBOSE] {check_time}: Daily bias is {daily_bias}, need BUY for GAIN bot")
                 return None
+
+            if verbose:
+                print(f"[VERBOSE] {check_time}: ✓ Step 1: Daily bias = {daily_bias}")
 
             # Step 2: Check daily stop (50% wick filled)
             current_price = df_d1['close'].iloc[-1]
             if indicators.is_wick_50_percent_filled(current_price, direction, wick_50_level):
+                if verbose:
+                    print(f"[VERBOSE] {check_time}: ✗ Step 2: Daily stop reached (50% wick filled)")
                 return None  # Daily stop reached
+
+            if verbose:
+                print(f"[VERBOSE] {check_time}: ✓ Step 2: Daily stop not reached")
 
             # Step 3: H4 50% Fibonacci confirmation
             df_h4 = self.get_bars_up_to(symbol, 'H4', check_time, count=10)
@@ -194,7 +211,12 @@ class HistoricalBacktester:
 
             h4_confirmed, fib_level = indicators.check_h4_50_percent_coverage(df_h4, df_m15, daily_bias)
             if not h4_confirmed:
+                if verbose:
+                    print(f"[VERBOSE] {check_time}: ✗ Step 3: H4 50% Fib not confirmed")
                 return None
+
+            if verbose:
+                print(f"[VERBOSE] {check_time}: ✓ Step 3: H4 50% Fib confirmed")
 
             # Step 4: H1 shingle confirmation
             df_h1 = self.get_bars_up_to(symbol, 'H1', check_time, count=100)
@@ -208,7 +230,12 @@ class HistoricalBacktester:
                 h1_confirmed = current_price < shingle.iloc[-1] and color == 'RED'
 
             if not h1_confirmed:
+                if verbose:
+                    print(f"[VERBOSE] {check_time}: ✗ Step 4: H1 shingle not confirmed")
                 return None
+
+            if verbose:
+                print(f"[VERBOSE] {check_time}: ✓ Step 4: H1 shingle confirmed")
 
             # Step 5: M30/M15 snake filter
             df_m30 = self.get_bars_up_to(symbol, 'M30', check_time, count=100)
@@ -233,7 +260,12 @@ class HistoricalBacktester:
                 m30_m15_confirmed = m30_color == 'RED' and m15_color == 'RED'
 
             if not m30_m15_confirmed:
+                if verbose:
+                    print(f"[VERBOSE] {check_time}: ✗ Step 5: M30/M15 snake not confirmed (M30:{m30_color}, M15:{m15_color})")
                 return None
+
+            if verbose:
+                print(f"[VERBOSE] {check_time}: ✓ Step 5: M30/M15 snake confirmed")
 
             # Step 6: M5/M1 entry with purple line
             # Use M1 if available, otherwise use M5
@@ -255,10 +287,15 @@ class HistoricalBacktester:
             )
 
             if not break_retest:
+                if verbose:
+                    print(f"[VERBOSE] {check_time}: ✗ Step 6: Purple line break/retest not confirmed")
                 return None
 
             # All 6 steps confirmed! Generate signal
             entry_price = df_entry['close'].iloc[-1]
+
+            if verbose:
+                print(f"[VERBOSE] {check_time}: ✓✓✓ ALL 6 STEPS CONFIRMED! SIGNAL GENERATED!")
 
             return {
                 'action': daily_bias,
@@ -349,7 +386,9 @@ class HistoricalBacktester:
         trade_count = 0
         checks_done = 0
 
-        print(f"\n[BACKTEST] Starting simulation...\n")
+        print(f"\n[BACKTEST] Starting simulation...")
+        print(f"[BACKTEST] Checking every 5 minutes for signals...")
+        print(f"[BACKTEST] (Verbose output enabled for first day)\n")
 
         while current_date <= self.end_date:
             day_str = current_date.strftime('%Y-%m-%d')
@@ -364,8 +403,11 @@ class HistoricalBacktester:
 
                     checks_done += 1
 
+                    # Enable verbose for first 50 checks to see what's happening
+                    verbose = checks_done <= 50
+
                     # Check for signal
-                    signal = self.check_signal_at_time(symbol, check_time, bot_type)
+                    signal = self.check_signal_at_time(symbol, check_time, bot_type, verbose=verbose)
 
                     if signal:
                         # Execute trade

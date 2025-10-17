@@ -4,11 +4,13 @@ Simple script to run backtests from command line
 Usage:
     python run_backtest.py --symbol "PainX 400" --days 7
     python run_backtest.py --symbol "GainX 400" --days 30 --bot gain
+    python run_backtest.py --symbol "PainX 400" --days 30 --relaxed  # Weakened constraints
 """
 
 import argparse
 from datetime import datetime, timedelta
 from pain_gain_bot.backtest.historical_backtester import HistoricalBacktester
+from pain_gain_bot.backtest.relaxed_backtester import RelaxedBacktester
 
 def main():
     parser = argparse.ArgumentParser(description="Run backtest for Pain/Gain trading strategy")
@@ -30,7 +32,7 @@ def main():
     parser.add_argument(
         '--days',
         type=int,
-        default=7,
+        default=30,
         help='Number of days to backtest (default: 7)'
     )
 
@@ -59,6 +61,12 @@ def main():
         help='Export results to CSV file'
     )
 
+    parser.add_argument(
+        '--relaxed',
+        action='store_true',
+        help='Use relaxed mode (weakened constraints, more trades)'
+    )
+
     args = parser.parse_args()
 
     # Calculate dates
@@ -79,14 +87,31 @@ def main():
     print(f"Bot type: {args.bot.upper()} ({'SELL' if args.bot == 'pain' else 'BUY'})")
     print(f"Period: {start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')}")
     print(f"Initial balance: ${args.balance:.2f}")
+
+    if args.relaxed:
+        print(f"Mode: RELAXED (weakened constraints)")
+        print(f"  - Daily bias is informational only")
+        print(f"  - Daily stop is warning only")
+        print(f"  - H4 Fib, H1 Shingle, Purple Line are optional")
+        print(f"  - Only ONE of M30/M15 snake required (not both)")
+    else:
+        print(f"Mode: STRICT (all 6 steps required)")
+
     print(f"\nStarting backtest...\n")
 
-    # Run backtest with new historical backtester
-    backtester = HistoricalBacktester(
-        start_date=start_date.strftime('%Y-%m-%d'),
-        end_date=end_date.strftime('%Y-%m-%d'),
-        initial_balance=args.balance
-    )
+    # Run backtest with selected backtester
+    if args.relaxed:
+        backtester = RelaxedBacktester(
+            start_date=start_date.strftime('%Y-%m-%d'),
+            end_date=end_date.strftime('%Y-%m-%d'),
+            initial_balance=args.balance
+        )
+    else:
+        backtester = HistoricalBacktester(
+            start_date=start_date.strftime('%Y-%m-%d'),
+            end_date=end_date.strftime('%Y-%m-%d'),
+            initial_balance=args.balance
+        )
 
     bot_type = 'PAIN' if args.bot == 'pain' else 'GAIN'
     results = backtester.run_backtest(args.symbol, bot_type=bot_type)
